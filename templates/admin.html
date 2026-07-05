@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta http-equiv="refresh" content="10">
+</head>
+
+<body class="admin-body">
+
+<div class="admin-container">
+
+    <!-- HEADER -->
+    <div class="admin-header">
+        <h1>Admin Dashboard</h1>
+        <p>Emergency SOS Alerts</p>
+        <h3 style="color:red; margin-top:10px;">
+            🔴 Active Emergency Alerts: {{ alerts | length }}
+        </h3>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats">
+        <div class="stat-card stat-total">
+            Total Alerts<br>
+            {{ alerts | length }}
+        </div>
+
+        <div class="stat-card stat-danger">
+            Danger Alerts<br>
+            {{ alerts | selectattr("Status", "equalto", "DANGER") | list | length }}
+        </div>
+    </div>
+
+    <!-- TABLE -->
+<table class="alert-table">
+    <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Status</th>
+        <th>Risk Zone</th> 
+        <th>Map</th>
+        <th>Time</th>
+    </tr>
+
+    {% for alert in alerts %}
+    <tr class="{% if alert.Status == 'DANGER' %}new-alert{% endif %}">
+        <td>{{ alert.Name }}</td>
+        <td>{{ alert.Location }}</td>
+        <td>{{ alert.Latitude }}</td>
+        <td>{{ alert.Longitude }}</td>
+        <td>
+            <span class="status {{ alert.Status | lower }}">
+                {{ alert.Status }}
+            </span>
+        </td>
+        <td>
+    {% if alert.Location %}
+        {% if "chennai" in alert.Location | lower %}
+            <span style="color:green; font-weight:bold;">🟢 Urban</span>
+        {% elif "coimbator" in alert.Location | lower %}
+            <span style="color:orange; font-weight:bold;">🟡 Semi-Remote</span>
+        {% else %}
+            <span style="color:red; font-weight:bold;">🔴 Remote</span>
+        {% endif %}
+    {% else %}
+        <span style="color:gray;">Unknown</span>
+    {% endif %}
+</td>
+
+       <td>
+    {% if alert.Latitude and alert.Longitude %}
+        <a
+          href="https://www.google.com/maps/search/?api=1&query={{ alert.Latitude }},{{ alert.Longitude }}"
+          target="_blank"
+          class="map-link"
+          title="Open exact location in Google Maps">
+          📍 View Location
+        </a>
+        <div style="font-size:12px; color:#555; margin-top:4px;">
+            ({{ alert.Latitude }}, {{ alert.Longitude }})
+        </div>
+    {% else %}
+        <span style="color:#999;">Location unavailable</span>
+    {% endif %}
+</td>
+
+        <td>{{ alert.Time }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+    <!-- BUTTONS -->
+    <div style="text-align:center; margin-top:25px;">
+        <a href="/download_sos">
+            <button>📥 Download SOS Report</button>
+        </a>
+    </div>
+
+    <div style="text-align:center;">
+        <a href="/admin_logout">
+            <button>Logout</button>
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>

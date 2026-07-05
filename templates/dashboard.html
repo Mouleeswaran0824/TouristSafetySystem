@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-body">
+
+    <div class="dashboard-container">
+        <h2>Welcome, {{ username }}</h2>
+        <p><strong>Location:</strong> {{ location }}</p>
+
+        <div class="status-card">
+    <h3>Status:
+        {% if status == "DANGER" %}
+            <span style="color:red;">DANGER</span>
+        {% else %}
+            <span style="color:green;">SAFE</span>
+        {% endif %}
+    </h3>
+</div>
+
+
+        <!-- ✅ SOS FORM STARTS HERE -->
+   <form method="post" action="/sos" id="sosForm">
+    <input type="hidden" name="username" value="{{ username }}">
+    <input type="hidden" name="location" value="{{ location }}">
+    <input type="hidden" name="latitude" id="latitude">
+    <input type="hidden" name="longitude" id="longitude">
+
+    <button type="button" class="sos-btn" onclick="sendSOS()">
+        🚨 Emergency SOS
+    </button>
+</form>
+<script>
+let watchId = null;
+
+function sendSOS() {
+    if (!navigator.geolocation) {
+        alert("GPS not supported");
+        return;
+    }
+
+    watchId = navigator.geolocation.watchPosition(
+        function(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            document.getElementById("latitude").value = lat;
+            document.getElementById("longitude").value = lon;
+
+            // Send first SOS normally
+            document.getElementById("sosForm").submit();
+
+            // Start live updates
+            startLiveTracking();
+
+            navigator.geolocation.clearWatch(watchId);
+        },
+        function() {
+            alert("Please allow GPS access");
+        },
+        { enableHighAccuracy: true }
+    );
+}
+
+function startLiveTracking() {
+    setInterval(() => {
+        navigator.geolocation.getCurrentPosition(pos => {
+            fetch("/update_location", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    username: "{{ username }}",
+                    latitude: pos.coords.latitude,
+                    longitude: pos.coords.longitude
+                })
+            });
+        });
+    }, 5000); // every 5 seconds
+}
+</script>
+
+
+
+
+
+        <!-- ✅ SOS FORM ENDS HERE -->
+
+    </div>
+
+</body>
+</html>
+
+

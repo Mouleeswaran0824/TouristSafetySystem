@@ -1,0 +1,259 @@
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ================= BASE BODY ================= */
+body {
+    min-height: 100vh;
+}
+
+/* ================= TOURIST LOGIN PAGE ================= */
+.login-body {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ================= LOGIN CARD ================= */
+.login-container {
+    background: white;
+    width: 380px;
+    padding: 40px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+}
+
+.login-container h2 {
+    color: #1a237e;
+    margin-bottom: 8px;
+}
+
+.login-container p {
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #1a237e, #3949ab);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    opacity: 0.9;
+}
+
+/* ================= TOURIST DASHBOARD ================= */
+.dashboard-body {
+    background: linear-gradient(to right, #1a237e, #3949ab);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard-container {
+    background: white;
+    width: 420px;
+    padding: 40px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+}
+
+.status-card {
+    background: #e8f5e9;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+}
+
+.sos-btn {
+    background-color: red;
+    color: white;
+    padding: 14px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* ================= ADMIN LOGIN ================= */
+.admin-login-body {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+        url("/static/admin_bg.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ================= ADMIN DASHBOARD BACKGROUND ================= */
+.admin-body {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        url("/static/admin_bg.jpg") no-repeat center center/cover;
+    padding: 40px;
+}
+
+/* ================= ADMIN CONTAINER ================= */
+.admin-container {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    width: 90%;
+    margin: auto;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.45);
+}
+
+/* ================= ADMIN HEADER ================= */
+.admin-header {
+    background: linear-gradient(135deg, #1a237e, #3949ab);
+    color: white;
+    padding: 25px;
+    border-radius: 14px;
+    margin-bottom: 25px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+/* ================= STATS CARDS ================= */
+.stats {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    flex: 1;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.stat-total {
+    background: #e3f2fd;
+}
+
+.stat-danger {
+    background: #ffebee;
+    color: #c62828;
+}
+
+/* ================= TABLE ================= */
+.alert-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.alert-table th,
+.alert-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+.alert-table th {
+    background: linear-gradient(135deg, #1a237e, #3949ab);
+    color: white;
+}
+
+.alert-table tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+.alert-table tr:hover {
+    background-color: #e3f2fd;
+    transition: 0.3s;
+}
+
+/* ================= STATUS BADGES ================= */
+.status {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.status.danger {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
+.status.safe {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+/* ================= ADMIN BUTTONS ================= */
+.admin-container button {
+    background: linear-gradient(135deg, #1a237e, #3949ab);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.admin-container button:hover {
+    transform: translateY(-2px);
+}
+/* ================= NEW ALERT GLOW ================= */
+.new-alert {
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 5px rgba(255,0,0,0.4);
+    }
+    to {
+        box-shadow: 0 0 18px rgba(255,0,0,0.9);
+    }
+}
+/* ================= MAP LINK STYLE ================= */
+
+.map-link {
+    text-decoration: none;
+    font-weight: bold;
+    color: #1a237e;
+}
+
+.map-link:hover {
+    color: red;
+    text-decoration: underline;
+}
